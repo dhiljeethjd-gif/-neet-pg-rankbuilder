@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+<title>NEET-PG Rank Builder</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;
+  background:#f5f7fb;
+  color:#111827;
+}
+.header{
+  background:#111827;
+  color:white;
+  padding:28px 20px 24px;
+  border-radius:0 0 28px 28px;
+}
+.header h1{margin:0;font-size:27px}
+.header p{margin:7px 0 0;color:#cbd5e1}
+.container{padding:20px;max-width:600px;margin:auto}
+.card{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 4px 18px rgba(0,0,0,.06);
+}
+.card h2{margin:0 0 8px;font-size:20px}
+.card p{color:#64748b;margin:5px 0 16px}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.button{
+  border:0;
+  border-radius:16px;
+  padding:18px 10px;
+  background:#eef2ff;
+  font-size:16px;
+  font-weight:600;
+  color:#1e293b;
+}
+.button:active{transform:scale(.97)}
+input{
+  width:100%;
+  padding:15px;
+  border:1px solid #dbe1ea;
+  border-radius:12px;
+  font-size:17px;
+  margin:8px 0 12px;
+}
+.primary{
+  width:100%;
+  background:#111827;
+  color:white;
+  border:0;
+  padding:16px;
+  border-radius:14px;
+  font-size:17px;
+  font-weight:700;
+}
+.result{
+  margin-top:15px;
+  padding:16px;
+  background:#f1f5f9;
+  border-radius:14px;
+  display:none;
+}
+.stat{
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  border-bottom:1px solid #e2e8f0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🩺 NEET-PG Rank Builder</h1>
+  <p>Your smart PYQ & revision companion</p>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h2>🎯 Today's Dashboard</h2>
+    <p>Build your rank one question at a time.</p>
+
+    <div class="grid">
+      <button class="button" onclick="showMessage('PYQ section coming next 🚀')">
+        📚 PYQs
+      </button>
+
+      <button class="button" onclick="showMessage('100 Topics coming next 🔥')">
+        🔥 100 Topics
+      </button>
+
+      <button class="button" onclick="showMessage('Mistake Bank coming next ❌')">
+        ❌ Mistakes
+      </button>
+
+      <button class="button" onclick="document.getElementById('rank').scrollIntoView()">
+        📊 Rank Builder
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="rank">
+    <h2>📊 Rank Calculator</h2>
+    <p>Enter your mock-test performance.</p>
+
+    <label>Correct answers</label>
+    <input id="correct" type="number" placeholder="e.g. 120">
+
+    <label>Wrong answers</label>
+    <input id="wrong" type="number" placeholder="e.g. 30">
+
+    <button class="primary" onclick="calculate()">Calculate Score</button>
+
+    <div class="result" id="result">
+      <div class="stat">
+        <span>Score</span>
+        <strong id="score"></strong>
+      </div>
+
+      <div class="stat">
+        <span>Attempted</span>
+        <strong id="attempted"></strong>
+      </div>
+
+      <div class="stat">
+        <span>Accuracy</span>
+        <strong id="accuracy"></strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📈 Your Progress</h2>
+    <div class="stat">
+      <span>PYQs completed</span>
+      <strong>0</strong>
+    </div>
+    <div class="stat">
+      <span>Mistakes saved</span>
+      <strong>0</strong>
+    </div>
+    <div class="stat">
+      <span>Topics revised</span>
+      <strong>0</strong>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function calculate(){
+  const correct = Number(document.getElementById("correct").value) || 0;
+  const wrong = Number(document.getElementById("wrong").value) || 0;
+
+  const attempted = correct + wrong;
+  const score = correct * 4 - wrong;
+  const accuracy = attempted
+    ? ((correct / attempted) * 100).toFixed(1)
+    : 0;
+
+  document.getElementById("score").textContent = score;
+  document.getElementById("attempted").textContent = attempted;
+  document.getElementById("accuracy").textContent = accuracy + "%";
+  document.getElementById("result").style.display = "block";
+}
+
+function showMessage(message){
+  alert(message);
+}
+</script>
+
+</body>
+</html>
